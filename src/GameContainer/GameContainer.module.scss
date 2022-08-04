@@ -1,0 +1,139 @@
+.GameContainer {
+  height: 100vh;
+  width: 100%;
+  padding: 7rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .ScoresContainer {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 3.2rem;
+    font-size: 1.6rem;
+    font-weight: 400;
+
+    .Scores {
+      background-color: var(--white);
+      color: var(--black);
+      padding: 1rem 2rem;
+      border-radius: 17px;
+      font-weight: 700;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    }
+  }
+
+  h3 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+
+    .O {
+      color: var(--green);
+    }
+
+    .X {
+      color: var(--red);
+    }
+  }
+
+  .Gameboard {
+    width: 100%;
+    height: 100%;
+    max-width: 40em;
+    max-height: 40rem;
+    padding: 2.5rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    justify-items: center;
+    align-items: center;
+    background-color: var(--white);
+    border-radius: 2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    user-select: none;
+    margin-bottom: 3.2rem;
+    position: relative;
+
+    .Tile {
+      cursor: pointer;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 7rem;
+      font-weight: 700;
+      transition: 0.3s ease background-color;
+
+      &:hover {
+        background-color: var(--white-hover);
+      }
+
+      &.GameOver {
+        cursor: default;
+
+        &:hover {
+          background-color: var(--white);
+        }
+      }
+
+      &:nth-child(-n + 3) {
+        border-bottom: var(--border);
+      }
+
+      &:nth-child(3n + 1) {
+        border-right: var(--border);
+      }
+
+      &:nth-child(3n) {
+        border-left: var(--border);
+      }
+
+      &:nth-child(n + 7) {
+        border-top: var(--border);
+      }
+
+      &.O {
+        cursor: default;
+        color: var(--green);
+        &:hover {
+          background-color: var(--white);
+        }
+      }
+
+      &.X {
+        cursor: default;
+        color: var(--red);
+        &:hover {
+          background-color: var(--white);
+        }
+      }
+    }
+  }
+
+  .ButtonRestart {
+    cursor: pointer;
+    font-family: inherit;
+    background-color: var(--white);
+    color: var(--black);
+    border: 0;
+    border-radius: 17px;
+    padding: 1.2rem 2.4rem;
+    font-size: 1.6rem;
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    transition: 0.3s ease background-color, 0.3s ease transform;
+    user-select: none;
+
+    &:hover {
+      background-color: var(--white-hover);
+    }
+
+    &:active {
+      transform: scale(0.97);
+    }
+  }
+}
