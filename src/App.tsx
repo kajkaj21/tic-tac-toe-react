@@ -1,4 +1,3 @@
-import styles from "./App.module.scss";
 import { StartingGameMenu } from "./StaringGameMenu/StartingGameMenu";
 import { GameContainer } from "./GameContainer/GameContainer";
 import { GameContext } from "./contexts/GameContext";
@@ -8,7 +7,7 @@ function App() {
   const gameCtx = useContext(GameContext);
 
   return (
-    <main className={styles.MainContainer}>
+    <main>
       {gameCtx.player1Value === null ? <StartingGameMenu /> : <GameContainer />}
     </main>
   );
