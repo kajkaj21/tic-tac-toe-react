@@ -1,0 +1,26 @@
+.Container {
+  cursor: pointer;
+  width: 14.5rem;
+  height: 14.5rem;
+  border-radius: 2rem;
+  background-color: var(--white);
+  color: var(--black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s ease background-color, 0.3s ease transform;
+  user-select: none;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+
+  &:hover {
+    background-color: var(--white-hover);
+  }
+
+  &:active {
+    transform: scale(0.97);
+  }
+
+  span {
+    font-size: 8rem;
+  }
+}

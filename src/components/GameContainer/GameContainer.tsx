@@ -1,5 +1,5 @@
 import styles from "./GameContainer.module.scss";
-import { GameContext } from "../contexts/GameContext";
+import { GameContext } from "../../contexts/GameContext";
 import { useContext } from "react";
 
 const GameContainer = () => {

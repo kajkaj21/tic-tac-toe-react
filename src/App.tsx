@@ -1,5 +1,5 @@
-import { StartingGameMenu } from "./StaringGameMenu/StartingGameMenu";
-import { GameContainer } from "./GameContainer/GameContainer";
+import { StartingGameMenu } from "./components/StaringGameMenu/StartingGameMenu";
+import { GameContainer } from "./components/GameContainer/GameContainer";
 import { GameContext } from "./contexts/GameContext";
 import { useContext } from "react";
 
@@ -8,7 +8,11 @@ function App() {
 
   return (
     <main>
-      {gameCtx.player1Value === null ? <StartingGameMenu /> : <GameContainer />}
+      {gameCtx.player1Value === null || gameCtx.gameMode === null ? (
+        <StartingGameMenu />
+      ) : (
+        <GameContainer />
+      )}
     </main>
   );
 }

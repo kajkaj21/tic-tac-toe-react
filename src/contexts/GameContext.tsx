@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useState } from "react";
+import { createContext, ReactNode, useEffect, useState } from "react";
 
 type GameContextTypes = {
   player1Value: null | PlayerValue;
@@ -13,9 +13,13 @@ type GameContextTypes = {
   isGameOver: boolean;
   winner: BoardPlace;
   startNewGame: () => void;
+  gameMode: GameMode;
+  selectGameMode: (gameMode: GameMode) => void;
 };
 
 type PlayerValue = "X" | "O";
+
+type GameMode = null | "friend" | "computer";
 
 type BoardPlace = null | PlayerValue;
 
@@ -33,6 +37,7 @@ const GameContextProvider = ({ children }: Props) => {
   const [player1Score, setPlayer1Score] = useState(0);
   const [player2Score, setPlayer2Score] = useState(0);
   const [isPlayer1Move, setPlayer1Move] = useState(true);
+  const [gameMode, setGameMode] = useState<GameMode>(null);
   const [board, setBoard] = useState<BoardPlace[][]>([
     [null, null, null],
     [null, null, null],
@@ -52,16 +57,45 @@ const GameContextProvider = ({ children }: Props) => {
     setPlayer1Move((prevPlayer1Move) => (prevPlayer1Move = !prevPlayer1Move));
   };
 
+  const selectGameMode = (gameMode: GameMode) => {
+    setGameMode(gameMode);
+  };
+
+  const randomPosition = () => {
+    return Math.floor(Math.random() * 3);
+  };
+
+  const computerMove = () => {
+    const boardCopy = [...board];
+    let randomRow = randomPosition();
+    let randomItem = randomPosition();
+    while (boardCopy[randomRow][randomItem] !== null) {
+      randomRow = randomPosition();
+      randomItem = randomPosition();
+    }
+    boardCopy[randomRow][randomItem] = player2Value;
+    setBoard(boardCopy);
+  };
+
+  useEffect(() => {
+    if (gameMode === "computer" && !isPlayer1Move && !isGameOver) {
+      computerMove();
+      checkWinner();
+      setIsPlayer1Move();
+    }
+  }, [isPlayer1Move, gameMode, isGameOver]);
+
   const selectBoardPosition = (
     row: number,
     column: number,
     val: BoardPlace
   ) => {
     if (isGameOver) return;
-    const helper = [...board];
-    if (helper[row][column] !== null) return;
-    helper[row][column] = val;
-    setBoard(helper);
+
+    const boardCopy = [...board];
+    if (boardCopy[row][column] !== null) return;
+    boardCopy[row][column] = val;
+    setBoard(boardCopy);
     checkWinner();
     setIsPlayer1Move();
   };
@@ -139,6 +173,7 @@ const GameContextProvider = ({ children }: Props) => {
 
   const startNewGame = () => {
     setIsGameOver(false);
+    setWinner(null);
     setBoard((prevBoard) =>
       prevBoard.map((row) => row.map((val) => (val = null)))
     );
@@ -159,6 +194,8 @@ const GameContextProvider = ({ children }: Props) => {
         isGameOver,
         winner,
         startNewGame,
+        gameMode,
+        selectGameMode,
       }}
     >
       {children}

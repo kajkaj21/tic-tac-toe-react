@@ -10,32 +10,6 @@
     justify-content: center;
   }
 
-  // &::after {
-  //   content: "O";
-  //   position: absolute;
-  //   top: 0;
-  //   right: 0;
-  //   transform: translate(40%, -22%);
-  //   font-size: 42rem;
-  //   font-weight: 700;
-  //   color: var(--black);
-  //   z-index: -1;
-  //   opacity: 0.2;
-  // }
-
-  // &::before {
-  //   content: "X";
-  //   position: absolute;
-  //   top: 0;
-  //   left: 0;
-  //   transform: translateX(-16%);
-  //   font-size: 42rem;
-  //   font-weight: 700;
-  //   color: var(--black);
-  //   z-index: -1;
-  //   opacity: 0.2;
-  // }
-
   h2 {
     font-size: 4.2rem;
     font-weight: 700;
@@ -55,5 +29,16 @@
   .Choices {
     display: flex;
     gap: 2.5rem;
+  }
+
+  .GameModeContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+
+    .Mode {
+      font-size: 2rem;
+    }
   }
 }
